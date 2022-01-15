@@ -8,6 +8,7 @@ export default function Student() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [students, setStudents] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
 
   const handleClick = (e) => {
@@ -24,8 +25,16 @@ export default function Student() {
     });
   };
 
+  const handleSearch = (e) => {
+    setSearchInput(e.target.value);
+    console.log(searchInput);
+  }
+  
   useEffect(() => {
-      fetch("http://localhost:8080/student/getAll")
+      let url = "http://localhost:8080/student/startswith?name=" + searchInput;
+      console.log(searchInput);
+      
+      fetch(url)
       .then(res => res.json())
       .then((result) => {
         setStudents(result);
@@ -69,6 +78,14 @@ export default function Student() {
       {/* <TextField id="filled-basic" label="Filled" variant="filled" />
       <TextField id="standard-basic" label="Standard" variant="standard" /> */}
     </Box>
+    <TextField
+        id="outlined-basic"
+        label="Search"
+        variant="outlined"
+        fullWidth
+        value={searchInput}
+        onChange={handleSearch}
+      />
     <Paper elevation={3}>
       {
          students.map(student => (

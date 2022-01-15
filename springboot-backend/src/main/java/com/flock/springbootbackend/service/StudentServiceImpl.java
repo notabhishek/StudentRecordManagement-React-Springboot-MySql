@@ -22,4 +22,19 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
+
+    @Override
+    public List<Student> startsWithName(String namePrefix) {
+        return studentRepository.startsWithName(namePrefix);
+    }
+
+    @Override
+    public List<Student> endsWithName(String nameSuffix) {
+        return studentRepository.endsWithName(nameSuffix);
+    }
+
+    @Override
+    public List<Student> containsName(String name) {
+        return studentRepository.containsName(name);
+    }
 }

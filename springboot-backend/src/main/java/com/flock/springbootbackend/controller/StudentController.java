@@ -3,6 +3,7 @@ package com.flock.springbootbackend.controller;
 import com.flock.springbootbackend.model.Student;
 import com.flock.springbootbackend.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,5 +25,21 @@ public class StudentController {
     @GetMapping("/getAll")
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
+    }
+
+    @GetMapping("/startswith")
+    public List<Student> getStudentsStartsWith(@Param("name") String name) {
+        System.out.println("namePrfix :" + name);
+        return studentService.startsWithName(name);
+    }
+
+    @GetMapping("/endswith")
+    public List<Student> getStudentsEndsWith(@Param("name") String name) {
+        return studentService.endsWithName(name);
+    }
+
+    @GetMapping("/contains")
+    public List<Student> getStudentsContains(@Param("name") String name) {
+        return studentService.containsName(name);
     }
 }
