@@ -37,4 +37,16 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> containsName(String name) {
         return studentRepository.containsName(name);
     }
+
+    @Override
+    public String deleteStudentId(int id) {
+        studentRepository.deleteStudentId(id);
+        return "Student " + String.valueOf(id) + " deleted!";
+    }
+
+    @Override
+    public String updateStudent(int id, String name, String address) {
+        studentRepository.updateStudent(id, name, address);
+        return "Student " + String.valueOf(id) + " updated!";
+    }
 }

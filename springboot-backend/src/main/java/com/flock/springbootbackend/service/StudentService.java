@@ -10,4 +10,6 @@ public interface StudentService {
     public List<Student> startsWithName(String namePrefix);
     public List<Student> endsWithName(String nameSuffix);
     public List<Student> containsName(String name);
+    public String deleteStudentId(int id);
+    public String updateStudent(int id, String name, String address);
 }

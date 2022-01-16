@@ -12,7 +12,6 @@ import java.util.List;
 @RequestMapping("/student")
 @CrossOrigin
 public class StudentController {
-
     @Autowired
     private StudentService studentService;
 
@@ -41,5 +40,15 @@ public class StudentController {
     @GetMapping("/contains")
     public List<Student> getStudentsContains(@Param("name") String name) {
         return studentService.containsName(name);
+    }
+
+    @DeleteMapping("/delete")
+    public String deleteStudentId(@Param("id") int id) {
+        return studentService.deleteStudentId(id);
+    }
+
+    @PostMapping("/update")
+    public String updateStudent(@Param("id") int id, @Param("name") String name, @Param("address") String address) {
+        return studentService.updateStudent(id, name, address);
     }
 }
