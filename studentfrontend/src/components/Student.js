@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Paper from '@mui/material/Paper';
+import FormDialog from "./Modal/UpdateModal";
 
 export default function Student() {
   const [name, setName] = useState("");
@@ -39,9 +40,17 @@ export default function Student() {
 
   }
 
-  const handleEdit = (e) => {
-    e.preventDefault();
-    console.log("edit id: " + e.target.value);
+  const handleEdit = (id, name, address) => {
+    // e.preventDefault();
+    // console.log("edit id: " + e.target.value);
+    console.log("edit called");
+    console.log({id, name, address});
+    let url = "http://localhost:8080/student/update?" + "id=" + id + "&" + "name=" + name + "&" + "address=" + address; 
+    fetch( url, { method: 'POST'} )
+    .then( (res) => {
+      console.log("updated successfully!");
+      fetchData();
+    });
   }
 
   function fetchData() {
@@ -54,7 +63,9 @@ export default function Student() {
         setStudents(result);
         console.log(students);
       }
-    )
+    ).catch( error => {
+      console.log("erorr in fetchData()");
+    })
   }
 
   const handleSearch = (e) => {
@@ -121,9 +132,7 @@ export default function Student() {
               Delete
             </Button>
 
-            <Button variant="contained" color="success" onClick={handleEdit} value={student.id}>
-              Edit
-            </Button>
+            <FormDialog student={student} onclick={handleEdit}/>
             </Paper>
          )
          )
